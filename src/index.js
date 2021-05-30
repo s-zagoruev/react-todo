@@ -1,15 +1,31 @@
 import React, {useLayoutEffect} from 'react'
 import ReactDOM from 'react-dom'
 
-const el = (
-  <div>
-    <h1>My Todo list</h1>
-    <input placeholder='search'/>
+const TodoList = () => {
+  return (
     <ul>
       <li>Learn React</li>
       <li>Build Awesome App</li>
     </ul>
-  </div>
-)
+  )
+}
 
-ReactDOM.render(el, document.getElementById('root'));
+const AppHeader = () => {
+  return <h1>My Todo list</h1>
+}
+
+const SearchPanel = () => {
+  return <input placeholder='search'/>
+}
+
+const App = () => {
+  return (
+    <div>
+      <AppHeader />
+      <SearchPanel />
+      <TodoList />
+    </div>
+  )
+}
+
+ReactDOM.render(<App/>, document.getElementById('root'))
