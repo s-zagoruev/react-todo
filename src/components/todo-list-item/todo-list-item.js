@@ -28,7 +28,7 @@ export default class TodoListItem extends Component {
     const {label, onDeleted} = this.props
     const {done, important} = this.state
 
-    let classNames = 'todo-list-item';
+    let classNames = 'todo-list-item'
     if (done) {
       classNames += ' done'
     }
