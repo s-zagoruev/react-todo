@@ -11,10 +11,18 @@ export default class App extends Component {
 
   state = {
     todoData: [
-      {label: 'Drink Coffee', important: false, id: 1},
-      {label: 'Make Awesome App', important: true, id: 2},
-      {label: 'Have a lunch', important: false, id: 3},
+      this.createTodoItem('Drink Coffee'),
+      this.createTodoItem('Make Awesome App'),
+      this.createTodoItem('Have a lunch'),
     ]
+  }
+
+  createTodoItem(label) {
+    return {
+      label: label,
+      important: false,
+      id: this.maxId++
+    }
   }
 
   deleteItem = (id) => {
@@ -34,11 +42,7 @@ export default class App extends Component {
   }
 
   addItem = (text) => {
-    const newItem = {
-      label: text,
-      important: false,
-      id: this.maxId++
-    }
+    const newItem = this.createTodoItem('New Item');
 
     this.setState(({todoData}) => {
       const newArr = [
@@ -51,6 +55,31 @@ export default class App extends Component {
     })
   }
 
+  onToggleDone = (id) => {
+    this.setState(({todoData}) => {
+      const idx = todoData.findIndex((el) => el.id === id)
+
+      //update object
+      const oldItem = todoData[idx]
+      const newItem = {...oldItem, done: !oldItem.done}
+
+      //construct new array
+      const newArr = [
+        ...todoData.slice(0, idx),
+        newItem,
+        ...todoData.slice(idx+1),
+      ]
+
+      return {
+        todoData: newArr
+      }
+    })
+  }
+
+  onToggleImportant = (id) => {
+    console.log('onToggleImportant', id)
+  }
+
   render() {
     return (
       <div className="todo-app">
@@ -61,7 +90,10 @@ export default class App extends Component {
         </div>
         <TodoList
           todos={this.state.todoData}
-          onDeleted={this.deleteItem}/>
+          onDeleted={this.deleteItem}
+          onToggleImportamt={this.onToggleImportant}
+          onToggleDone={this.onToggleDone}
+        />
         <ItemAddForm onItemAded={this.addItem}/>
       </div>
     )
