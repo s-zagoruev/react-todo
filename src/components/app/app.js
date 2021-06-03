@@ -81,15 +81,19 @@ export default class App extends Component {
   }
 
   render() {
+    const {todoData} = this.state
+    const doneCount = todoData.filter(el => el.done).length
+    const todoCount = todoData.length - doneCount
+
     return (
       <div className="todo-app">
-        <AppHeader toDo={3} done={2}/>
+        <AppHeader toDo={todoCount} done={doneCount}/>
         <div className="top-panel d-flex">
           <SearchPanel/>
           <ItemStatusFilter/>
         </div>
         <TodoList
-          todos={this.state.todoData}
+          todos={todoData}
           onDeleted={this.deleteItem}
           onToggleImportamt={this.onToggleImportant}
           onToggleDone={this.onToggleDone}
