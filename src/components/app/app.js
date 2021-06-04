@@ -42,7 +42,7 @@ export default class App extends Component {
   }
 
   addItem = (text) => {
-    const newItem = this.createTodoItem('New Item');
+    const newItem = this.createTodoItem(text);
 
     this.setState(({todoData}) => {
       const newArr = [
@@ -102,7 +102,7 @@ export default class App extends Component {
           onToggleImportamt={this.onToggleImportant}
           onToggleDone={this.onToggleDone}
         />
-        <ItemAddForm onItemAded={this.addItem}/>
+        <ItemAddForm onItemAdded={this.addItem}/>
       </div>
     )
   }
