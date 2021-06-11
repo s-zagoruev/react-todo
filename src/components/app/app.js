@@ -23,6 +23,7 @@ export default class App extends Component {
     return {
       label: label,
       important: false,
+      done: false,
       id: this.maxId++
     }
   }
@@ -103,7 +104,6 @@ export default class App extends Component {
   }
 
   filter (items, filter) {
-    console.log(items);
     switch (filter) {
       case 'all':
         return items
@@ -134,7 +134,7 @@ export default class App extends Component {
         <TodoList
           todos={visibleItems}
           onDeleted={this.deleteItem}
-          onToggleImportamt={this.onToggleImportant}
+          onToggleImportant={this.onToggleImportant}
           onToggleDone={this.onToggleDone}
         />
         <ItemAddForm onItemAdded={this.addItem}/>
